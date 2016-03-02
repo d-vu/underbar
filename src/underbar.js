@@ -232,7 +232,6 @@
             isSome = true;
         }     
     }
-
     else{
       _.every(collection, function(item){
         if(iterator(item)){
