@@ -306,7 +306,7 @@
       if (!alreadyCalled) {
         // TIP: .apply(this, arguments) is the standard way to pass on all of the
         // infromation from one function call to another.
-        result = func.apply(this, arguments);
+        result = func.apply(null, arguments);
         alreadyCalled = true;
       }
       // The new function always returns the originally computed result.
@@ -346,6 +346,20 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var copiedArray = array.slice(0,array.length);
+    var shuffled = [];
+
+    function getRandomIndex(array){
+      return Math.floor(Math.random()*array.length);
+    }
+
+    for(var i = 0; i < array.length; i++){
+      //push the first element of the array created from the random index of copiedArray
+      shuffled[i] = copiedArray.splice(getRandomIndex(copiedArray),1)[0];
+    }
+
+    return shuffled;
+
   };
 
 
