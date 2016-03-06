@@ -323,6 +323,16 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+  // Create dictionary object as a key/value look up
+  // Keys are created by converting the arguments array into a string key
+  // Values are stored in these keys by applying the function to it
+    var dictionary = {};
+    return function(){
+      if(dictionary[JSON.stringify(arguments)] === undefined){
+        dictionary[JSON.stringify(arguments)] = func.apply(null, arguments);
+      }
+      return dictionary[JSON.stringify(arguments)];
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
